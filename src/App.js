@@ -19,6 +19,7 @@ export default class App extends React.Component {
     }
 
     this.checkAnswers = this.checkAnswers.bind(this)
+    this.resetQuiz = this.resetQuiz.bind(this)
   }
 
 
@@ -61,6 +62,15 @@ export default class App extends React.Component {
     console.log(points);
   }
 
+  resetQuiz() {
+    this.setState({
+      useStyle: false,
+      textInput: '',
+      userAnswers: [''],
+      score: 0
+    })
+  }
+
   componentDidMount() {
     this.setState({quizBook: quizBook})
   }
@@ -77,11 +87,14 @@ export default class App extends React.Component {
               </button>
             )}
           </div>
-          <p>Subject: {this.state.subject}</p>
-          <p>Points: {this.state.score}/{this.state.maxScore}</p>
+          <p className='subjectTitle' >Subject: {this.state.subject}</p>
+          <p className='scoreCounter' >Points: {this.state.score}/{this.state.maxScore}</p>
         </div>
         <button className='answerButton' onClick={this.checkAnswers}>
           Check Answers
+        </button>
+        <button className='resetButton' onClick={this.resetQuiz}>
+          Try again
         </button>
         <div className='quiz-container'>
           <ol className='input-list'>
